@@ -2,3 +2,5 @@
 *.swp
 rdoc/
 pkg/
+.bundle
+Gemfile.lock

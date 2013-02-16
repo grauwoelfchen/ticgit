@@ -344,7 +344,7 @@ module TicGitNG
     end
 
     def tic_states
-      ['open', 'resolved', 'invalid', 'hold']
+      ['open', 'resolved', 'invalid', 'hold', 'pending']
     end
 
     def sync_tickets(repo='origin', push=true, verbose=true )

@@ -26,8 +26,8 @@ describe TicGitNG::Base do
     }.should raise_error SystemExit
   end
 
-  it "should have 4 ticket states" do
-    @ticgitng.tic_states.size.should eql(4)
+  it "should have 5 ticket states" do
+    @ticgitng.tic_states.size.should eql(5)
   end
 
   it "should be able to create new tickets" do

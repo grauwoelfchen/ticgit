@@ -42,6 +42,7 @@ module TicGitNG
     end
 
     def execute!
+      res = false
       if mod = Command.get(action)
         extend(mod)
 
@@ -51,18 +52,24 @@ module TicGitNG
           option_parser = Command.parser(action)
         end
 
-        option_parser.parse!(args)
-
-        execute if respond_to?(:execute)
-      else
-        puts usage
-
-        if args.empty? and !action
-          exit
-        else
-          puts('%p is not a command' % action)
-          exit 1
+        begin
+          option_parser.parse!(args)
+          if res = respond_to?(:execute)
+            execute
+          end
+        rescue OptionParser::MissingArgument => err
+          puts err
         end
+      end
+
+      unless mod
+        exit if args.empty? and !action
+        puts('%p is not a command' % action)
+      end
+      unless res and mod
+        puts
+        puts usage
+        exit 1
       end
     end
 
